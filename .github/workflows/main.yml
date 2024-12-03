@@ -17,6 +17,17 @@ jobs:
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_CREDENTIAL }}  # 從 Secrets 獲取 JSON
         run: |
+          echo "$SERVICE_ACCOUNT_KEY" > ally-data01-95e5af44c537.json
+
+      # 調試步驟：檢查生成的文件
+      - name: Verify the generated file
+        run: |
+          echo "Listing files in the current directory:"
+          ls -l ally-data01-95e5af44c537.json
+
+      # 提交生成的文件到儲存庫
+      - name: Commit and push service account key file
+        run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@example.com"
           git add ally-data01-95e5af44c537.json
