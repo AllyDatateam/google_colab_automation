@@ -1,0 +1,20 @@
+name: Generate Service Account Credential
+
+on:
+  workflow_dispatch:  # 支援手動執行
+
+jobs:
+  generate-credential:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 檢出程式碼
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 創建憑證文件
+      - name: Create service account key file
+        env:
+          SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_CREDENTIAL }}  # 從 Secrets 獲取 JSON
+        run: |
+          echo "$GOOGLE_CREDENTIAL" > ally-data01-95e5af44c537.json
